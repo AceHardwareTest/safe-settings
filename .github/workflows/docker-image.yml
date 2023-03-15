@@ -19,3 +19,6 @@ jobs:
     - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       run: docker build . --file Dockerfile --tag ace-safe-settings
+      
+    - name: Push the image into local
+      run: docker save -o c:/temp/output
