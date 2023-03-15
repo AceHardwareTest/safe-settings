@@ -20,5 +20,5 @@ jobs:
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       run: docker build . --file Dockerfile --tag ace-safe-settings
       
-    - name: Push the image into local
-      run: docker save -o c:/ace-safe-settings.tar centos:16
+    - name: Login into ACR
+      run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io
