@@ -38,11 +38,11 @@ USER node
 #RUN chmod 400 /opt/safe-settings/.ssh/safe-settings.pem /opt/safe-settings/.env
 
 ## Install the app and dependencies
-RUN npm install
+#RUN npm install
 
 ## This app will listen on port 3000
 EXPOSE 3000
 
 ## This does not start properly when using the ['npm','start'] format
 ## so stick with just calling it outright
-CMD npm start
+#CMD npm start
