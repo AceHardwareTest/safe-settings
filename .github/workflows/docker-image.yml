@@ -10,8 +10,8 @@ jobs:
 
   build:
 
-    #runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
+    #runs-on: ubuntu-latest
     #runs-on: [self-hosted, Windows, x64, DEV]
 
     steps:
@@ -23,7 +23,5 @@ jobs:
     - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       run: docker build . --file Dockerfile --tag ace-safe-settings
-      
-    - name: Push the Docker image      
-      run: docker push NAME[:TAG]
+    
       
