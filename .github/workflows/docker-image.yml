@@ -21,4 +21,4 @@ jobs:
       run: docker build . --file Dockerfile --tag ace-safe-settings
       
     - name: Push the image into local
-      run: docker save -o c:/temp/output/ace-safe-settings.tar centos:16
+      run: docker save -o c:/temp/ace-safe-settings.tar centos:16
