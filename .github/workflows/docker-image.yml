@@ -24,7 +24,6 @@ jobs:
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       run: docker build . --file Dockerfile --tag ace-safe-settings
       
-    - name: Push the Docker image
-      #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-      run: docker push safesettingsregistry.azurecr.io/ace-safe-settings
+    - name: Push the Docker image      
+      run: docker push NAME[:TAG]
       
