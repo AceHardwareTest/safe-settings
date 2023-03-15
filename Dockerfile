@@ -1,5 +1,5 @@
 #FROM node:14.17.6-alpine
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 ENV NODE_ENV production
 ## Set the Labels
 LABEL version="1.0" \
