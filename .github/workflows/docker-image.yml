@@ -33,3 +33,11 @@ jobs:
         load: true
         tags:  |
             ${{ inputs.tag }}
+            
+    - name: Run Functional Tests
+      id: functionaltest
+      shell: bash
+      run: |
+          docker run --env APP_ID=${{ secrets.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ${{ inputs.tag }}
+          sleep 5
+          curl http://localhost:80
