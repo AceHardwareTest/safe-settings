@@ -5,8 +5,8 @@ on:
     branches: [ "main" ]
 jobs:
   build-docker-image:
-    #runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
-    runs-on: ubuntu-latest    
+    runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
+    #runs-on: ubuntu-latest    
 
     steps:
     #- uses: actions/checkout@v3
