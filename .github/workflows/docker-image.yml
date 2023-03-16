@@ -24,8 +24,11 @@ jobs:
         context: .
         file: ./Dockerfile
         load: true
-        tags: ace-safe-settings-image
-            
+        tags: ace-safe-settings-image        
+    - name: Inspect the Docker Image
+      shell: bash
+      run: |
+        docker image inspect ace-safe-settings-image         
     - name: Run Functional Tests
       id: functionaltest
       shell: bash
