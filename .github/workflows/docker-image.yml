@@ -39,7 +39,7 @@ jobs:
       if: ${{ success() }}
       uses: docker/build-push-action@v2
       with:
-        context: .
-        file: ./Dockerfile
+        #context: .
+        #file: ./Dockerfile
         push: true
-        tags: safesettingsregistry.azurecr.io       
+        tags: ace-safe-settings-image       
