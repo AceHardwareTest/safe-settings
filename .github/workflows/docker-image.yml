@@ -5,30 +5,11 @@ on:
     branches: [ "main" ]
 jobs:
   build-docker-image:
-    runs-on: [self-hosted, Windows, x64, DEV]
-    #runs-on: ubuntu-latest    
+    #runs-on: [self-hosted, Windows, x64, DEV]
+    runs-on: ubuntu-latest    
 
     steps:
-    #- uses: actions/checkout@v3
-    - name: DISPLAY LAST COMMIT ID
-      run: |            
-          echo  ${{ github.sha }}            
-    - name: TO DELETE GH WORKSPACE FOLDER     
-      run: rm ${{ github.workspace }} -Force -Recurse -Verbose -ErrorAction SilentlyContinue 
-    - name: Set up JDK 11                
-      uses: actions/setup-java@v1        
-      with:
-        java-version: 1.11     
-      
-    - uses: actions/checkout@v2             
-      with:     
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis           
-          
-    - name: JFROG CLI SETUP
-      uses: jfrog/setup-jfrog-cli@v2.0.0      
-      env:
-        JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}         
-        JFROG_CLI_TRANSITIVE_DOWNLOAD_EXPERIMENTAL: 'true'
+    - uses: actions/checkout@v3
     
     #- name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
