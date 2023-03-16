@@ -49,8 +49,8 @@ jobs:
     - name: Login to JFrog
       uses: jfrog/setup-jfrog-cli@v1
       with:
-        registry: http://liss0768:8082/artifactory/
+        login-server: http://liss0768:8082/artifactory/
         username: ${{ secrets.JF_UN  }}
         password: ${{ secrets.JF_PW  }}
         
-    - run: jfrog rt docker-push ace-safe-settings-image "ACEHW-DEVCI/${{ github.event.repository.name }}/" 	http://liss0768:8082/artifactory/
+    - run: jfrog rt docker-push ace-safe-settings-image "http://liss0768:8082/artifactory/ACEHW-DEVCI/${{ github.event.repository.name }}/"
