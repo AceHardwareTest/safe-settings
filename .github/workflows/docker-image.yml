@@ -40,7 +40,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        #file: ./Dockerfile
+        file: ./Dockerfile
         push: true
-        tags: safesettingsregistry.azurecr.io/aspcoresample:${{ github.sha }}
-        file: aspnet-core-dotnet-core/Dockerfile
+        tags: safesettingsregistry.azurecr.io/aspcoresample:${{ github.sha }}        
