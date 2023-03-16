@@ -1,13 +1,12 @@
 name: Docker Image CI
+
 on:
   push:
     branches: [ "main" ]
 jobs:
-  build:
+  build-docker-image:
     #runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
-    runs-on: ubuntu-latest
-    #runs-on: [self-hosted, Windows, x64, DEV]
-    #runs-on: windows-latest
+    runs-on: ubuntu-latest    
 
     steps:
     - uses: actions/checkout@v3    
@@ -31,7 +30,6 @@ jobs:
       id: functionaltest
       shell: bash
       run: |
-          echo ${{ vars.APP_ID }}
-          docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
-          #sleep 5
+          docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ vars.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ vars.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
+          sleep 10
           #curl http://localhost:80
