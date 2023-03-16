@@ -41,7 +41,7 @@ jobs:
         password: lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY
     #- name: Login into ACR
       #run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io      
-    - name: Push Docker Image
+    - name: Push Docker Image to ACR
       if: ${{ success() }}  
       run: |
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
