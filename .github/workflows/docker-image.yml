@@ -40,8 +40,14 @@ jobs:
           docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ vars.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ vars.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
           sleep 10
           #curl http://localhost:80
-    - name: Login into ACR
-      run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io      
+    - name: Login to Azure Container Registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: safesettingsregistry.azurecr.io
+        username: safe-settings-registry
+        password: lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY
+    #- name: Login into ACR
+      #run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io      
     - name: Push Docker Image
       if: ${{ success() }}
       uses: docker/build-push-action@v2
