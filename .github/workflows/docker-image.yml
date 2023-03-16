@@ -11,9 +11,9 @@ jobs:
   build:
 
     #runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
-    #runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     #runs-on: [self-hosted, Windows, x64, DEV]
-    runs-on: windows-latest
+    #runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3    
@@ -21,8 +21,15 @@ jobs:
     - name: Login into ACR
       run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io
       
-    - name: Build the Docker image
+    #- name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-      run: docker build . --file Dockerfile --tag ace-safe-settings
-    
-      
+      #run: docker build . --file Dockerfile --tag ace-safe-settings
+           
+    - name: Build Docker Image Locally
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        load: true
+        tags:  |
+            ${{ inputs.tag }}
