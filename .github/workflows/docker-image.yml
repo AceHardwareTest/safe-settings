@@ -9,11 +9,8 @@ jobs:
     runs-on: ubuntu-latest    
 
     steps:
-    - uses: actions/checkout@v3    
-      
-    - name: Login into ACR
-      run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io
-      
+    - uses: actions/checkout@v3        
+    
     #- name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       #run: docker build . --file Dockerfile --tag ace-safe-settings-image
@@ -36,11 +33,14 @@ jobs:
           docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ vars.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ vars.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
           sleep 10
           #curl http://localhost:80
+    - name: Login into ACR
+      run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io      
     - name: Push Docker Image
       if: ${{ success() }}
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./Dockerfile
+        #file: ./Dockerfile
         push: true
-        tags: ace-safe-settings-image
+        tags: safesettingsregistry.azurecr.io/aspcoresample:${{ github.sha }}
+        file: aspnet-core-dotnet-core/Dockerfile
