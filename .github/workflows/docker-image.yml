@@ -1,15 +1,18 @@
 name: Docker Image CI
-
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+  workflow_call:
+    inputs:
+      tag:  
+        description: 'Image tag '
+        required: true  
+        default: 'user/app:latest'
+        type: string
+    outputs:
+      imageid:
+        description: "Docker Image Id"
+        value: ${{ steps.push.outputs.imageid }}
 jobs:
-
   build:
-
     #runs-on: [self-hosted, Windows, x64, DEVDEPLOYMENT]
     runs-on: ubuntu-latest
     #runs-on: [self-hosted, Windows, x64, DEV]
