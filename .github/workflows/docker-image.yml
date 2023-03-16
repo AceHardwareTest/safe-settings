@@ -31,6 +31,7 @@ jobs:
       id: functionaltest
       shell: bash
       run: |
-          docker run --env APP_ID=${{ env.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
+          echo ${{ vars.APP_ID }}
+          docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
           #sleep 5
           #curl http://localhost:80
