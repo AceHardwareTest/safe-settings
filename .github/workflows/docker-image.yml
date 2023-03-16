@@ -46,6 +46,5 @@ jobs:
       run: |
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
             docker push safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}                   
-        
-            
+                    
     #- run: jfrog rt docker-push ace-safe-settings-image --url "http://liss0768:8082/artifactory/ACEHW-DEVCI/${{ github.event.repository.name }}/"
