@@ -46,9 +46,5 @@ jobs:
       run: |
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
             docker push safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}                   
-    - name: Login to JFrog
-      uses: docker/login-action@v1
-      with:
-        registry: http://localhost:8082/artifactory/
-        username: ${{ secrets.JF_UN  }}
-        password: ${{ secrets.JF_PW  }}
+    - name: Login to JFrog      
+      run: docker login -u ${{ secrets.JF_UN  }} -p ${{ secrets.JF_PW  }} 	http://liss0768:8082/artifactory/
