@@ -46,10 +46,10 @@ jobs:
       run: |
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
             docker push safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}                   
-    - name: JFROG CLI SETUP 
-      uses: jfrog/setup-jfrog-cli@v1      
+    - name: JFROG CLI SETUP
+      uses: jfrog/setup-jfrog-cli@v2.0.0
       env:
-        JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}         
-        JFROG_CLI_TRANSITIVE_DOWNLOAD_EXPERIMENTAL: 'true' 
+        JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}      
+        JFROG_CLI_TRANSITIVE_DOWNLOAD_EXPERIMENTAL: 'true'
             
     #- run: jfrog rt docker-push ace-safe-settings-image --url "http://liss0768:8082/artifactory/ACEHW-DEVCI/${{ github.event.repository.name }}/"
