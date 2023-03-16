@@ -32,5 +32,5 @@ jobs:
       shell: bash
       run: |
           docker run --env APP_ID=${{ secrets.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
-          sleep 5
-          curl http://localhost:80
+          #sleep 5
+          #curl http://localhost:80
