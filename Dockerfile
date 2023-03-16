@@ -44,6 +44,12 @@ USER node
 ## This app will listen on port 3000
 EXPOSE 3000
 
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim 
+WORKDIR /opt/safe-settings
+COPY --from=build-env /opt/safe-settings/out .
+ENTRYPOINT ["dotnet", "aspnet-core-dotnet-core.dll"]
+
 ## This does not start properly when using the ['npm','start'] format
 ## so stick with just calling it outright
 #CMD npm start
