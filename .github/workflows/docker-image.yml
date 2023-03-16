@@ -17,7 +17,7 @@ jobs:
       
     #- name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-      #run: docker build . --file Dockerfile --tag ace-safe-settings
+      #run: docker build . --file Dockerfile --tag ace-safe-settings-image
            
     - name: Build Docker Image Locally
       uses: docker/build-push-action@v2
@@ -25,12 +25,12 @@ jobs:
         context: .
         file: ./Dockerfile
         load: true
-        tags: ace-safe-settings
+        tags: ace-safe-settings-image
             
     - name: Run Functional Tests
       id: functionaltest
       shell: bash
       run: |
-          docker run --env APP_ID=${{ secrets.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ${{ inputs.tag }}
+          docker run --env APP_ID=${{ secrets.APP_ID }} --env PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
           sleep 5
           curl http://localhost:80
