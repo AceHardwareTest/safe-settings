@@ -33,18 +33,29 @@ jobs:
           docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ vars.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ vars.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
           sleep 10
           #curl http://localhost:80
-    - name: Login to Azure Container Registry
+    - name: Login to ACR
       uses: azure/docker-login@v1
       with:
         login-server: safesettingsregistry.azurecr.io
         username: safe-settings-registry
         password: lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY
-    #- name: Login into ACR
-      #run: docker login -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY safesettingsregistry.azurecr.io      
+    
     - name: Push Docker Image to ACR
       if: ${{ success() }}  
       run: |
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
             docker push safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}                   
-                    
-    #- run: jfrog rt docker-push ace-safe-settings-image --url "http://liss0768:8082/artifactory/ACEHW-DEVCI/${{ github.event.repository.name }}/"
+            
+    - name: Deploy to K8s                
+    - uses: azure/login@v1
+      with:
+        #client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }} 
+    - uses: azure/aks-set-context@v3
+      with:
+        resource-group: ${{vars.AZURE_RESOURCE_GROUP}}
+        cluster-name: ${{vars.AZURE_AKS_CLUSTER}}
+      id: login
+    - run: |
+          kubectl get deployment
