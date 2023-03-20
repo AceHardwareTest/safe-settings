@@ -31,7 +31,7 @@ jobs:
       shell: bash
       run: |
           docker run --env APP_ID=${{ vars.APP_ID }} --env PRIVATE_KEY=${{ vars.PRIVATE_KEY }} --env WEBHOOK_SECRET=${{ vars.WEBHOOK_SECRET }} -d -p 3000:3000 ace-safe-settings-image
-          sleep 10
+          sleep 5
           #curl http://localhost:80
     - name: Login to ACR
       uses: azure/docker-login@v1
@@ -46,16 +46,16 @@ jobs:
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
             docker push safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}                   
             
-    - name: Deploy to K8s                
-    - uses: azure/login@v1
-      with:
-        #client-id: ${{ vars.AZURE_CLIENT_ID }}
-        tenant-id: ${{ vars.AZURE_TENANT_ID }}
-        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }} 
-    - uses: azure/aks-set-context@v3
-      with:
-        resource-group: ${{vars.AZURE_RESOURCE_GROUP}}
-        cluster-name: ${{vars.AZURE_AKS_CLUSTER}}
-      id: login
-    - run: |
-          kubectl get deployment
+    #- name: Deploy to K8s                
+    #- uses: azure/login@v1
+    #  with:
+    #   #client-id: ${{ vars.AZURE_CLIENT_ID }}
+    #    tenant-id: ${{ vars.AZURE_TENANT_ID }}
+    #    subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }} 
+    #- uses: azure/aks-set-context@v3
+    #  with:
+    #    resource-group: ${{vars.AZURE_RESOURCE_GROUP}}
+    #    cluster-name: ${{vars.AZURE_AKS_CLUSTER}}
+    #  id: login
+    #- run: |
+    #      kubectl get deployment
