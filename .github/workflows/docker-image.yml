@@ -16,7 +16,7 @@ jobs:
       #run: docker build . --file Dockerfile --tag ace-safe-settings-image
            
     - name: Build Docker Image Locally
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v4
       with:
         context: .
         file: ./Dockerfile
