@@ -45,8 +45,8 @@ jobs:
       run: |
             docker tag ace-safe-settings-image:latest safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}
             docker push safesettingsregistry.azurecr.io/ace-safe-settings-image:${{ github.sha }}                   
-    - name: Login to ACK      
-      run:  az login --service-principal -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY --tenant ${{ vars.AZURE_TENANT_ID }}
+    #- name: Login to ACK      
+      #run:  az login --service-principal -u safe-settings-registry -p lfuJXF6MYGELS1V8RVVRtEWvYIvq21XDaywfPY0znI+ACRCMzWvY --tenant ${{ vars.AZURE_TENANT_ID }}
       
    # - name: Login to AKS                
       #uses: azure/login@v1
