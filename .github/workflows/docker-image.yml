@@ -21,7 +21,8 @@ jobs:
         context: .
         file: ./Dockerfile
         load: true
-        tags: ace-safe-settings-image        
+        tags: ace-safe-settings-image:$(date +%Y%m%d%H%M%S)
+        latest: ace-safe-settings-image:latest
     - name: Inspect the Docker Image
       shell: bash
       run: |
