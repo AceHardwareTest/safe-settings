@@ -8,24 +8,34 @@ const NopCommand = require('./lib/nopcommand')
 const env = require('./lib/env')
 
 let deploymentConfig
-module.exports = (robot, _, Settings = require('./lib/settings')) => {
-  async function syncAllSettings (nop, context, repo = context.repo(), ref) {
-    try {
-      deploymentConfig = await loadYamlFileSystem()
-      robot.log.debug(`deploymentConfig is ${JSON.stringify(deploymentConfig)}`)
-      const configManager = new ConfigManager(context, ref)
-      const runtimeConfig = await configManager.loadGlobalSettingsYaml()
-      const config = Object.assign({}, deploymentConfig, runtimeConfig)
-      robot.log.debug(`config for ref ${ref} is ${JSON.stringify(config)}`)
-      if (ref) {
-        return Settings.syncAll(nop, context, repo, config, ref)
-      } else {
+module.exports = (robot, _, Settings = require('./lib/settings')) => 
+{
+  async function syncAllSettings (nop, context, repo = context.repo(), ref) 
+  {
+    try 
+    {
+        deploymentConfig = await loadYamlFileSystem()
+        robot.log.debug(`deploymentConfig is ${JSON.stringify(deploymentConfig)}`)
+        const configManager = new ConfigManager(context, ref)
+        const runtimeConfig = await configManager.loadGlobalSettingsYaml()
+        const config = Object.assign({}, deploymentConfig, runtimeConfig)
+        robot.log.debug(`config for ref ${ref} is ${JSON.stringify(config)}`)
+        if (ref) 
+        {
+          return Settings.syncAll(nop, context, repo, config, ref)
+        } 
+        else 
+        {
         return Settings.syncAll(nop, context, repo, config)
-      }
-    } catch (e) {
-      if (nop) {
+        }
+    } 
+    catch (e) 
+    {
+      if (nop) 
+      {
         let filename = env.SETTINGS_FILE_PATH
-        if (!deploymentConfig) {
+        if (!deploymentConfig) 
+        {
           filename = env.DEPLOYMENT_CONFIG_FILE
           deploymentConfig = {}
         }
@@ -33,14 +43,18 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
         robot.log.error(`NOPCOMMAND ${JSON.stringify(nopcommand)}`)
         Settings.handleError(nop, context, repo, deploymentConfig, ref, nopcommand)
       }
-      } else {
+     else 
+      {
         throw e
       }
     }
   }
+}
 
-  async function syncSubOrgSettings (nop, context, suborg, repo = context.repo(), ref) {
-    try {
+  async function syncSubOrgSettings (nop, context, suborg, repo = context.repo(), ref) 
+  {
+    try 
+    {
       deploymentConfig = await loadYamlFileSystem()
       robot.log.debug(`deploymentConfig is ${JSON.stringify(deploymentConfig)}`)
       const configManager = new ConfigManager(context, ref)
@@ -48,25 +62,32 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
       const config = Object.assign({}, deploymentConfig, runtimeConfig)
       robot.log.debug(`config for ref ${ref} is ${JSON.stringify(config)}`)
       return Settings.syncSubOrgs(nop, context, suborg, repo, config, ref)
-    } catch (e) {
-      if (nop) {
+    }
+    catch (e) 
+    {
+      if (nop) 
+      {
         let filename = env.SETTINGS_FILE_PATH
-        if (!deploymentConfig) {
+        if (!deploymentConfig) 
+        {
           filename = env.DEPLOYMENT_CONFIG_FILE
           deploymentConfig = {}
         }
         const nopcommand = new NopCommand(filename, repo, null, e, 'ERROR')
         robot.log.error(`NOPCOMMAND ${JSON.stringify(nopcommand)}`)
         Settings.handleError(nop, context, repo, deploymentConfig, ref, nopcommand)
-      }
-      } else {
+      } 
+      else 
+      {
         throw e
       }
     }
   }
 
-  async function syncSettings (nop, context, repo = context.repo(), ref) {
-    try {
+  async function syncSettings (nop, context, repo = context.repo(), ref) 
+  {
+    try 
+    {
       deploymentConfig = await loadYamlFileSystem()
       robot.log.debug(`deploymentConfig is ${JSON.stringify(deploymentConfig)}`)
       const configManager = new ConfigManager(context, ref)
@@ -74,10 +95,14 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
       const config = Object.assign({}, deploymentConfig, runtimeConfig)
       robot.log.debug(`config for ref ${ref} is ${JSON.stringify(config)}`)
       return Settings.sync(nop, context, repo, config, ref)
-    } catch (e) {
-      if (nop) {
+    } 
+    catch (e) 
+    {
+      if (nop) 
+      {
         let filename = env.SETTINGS_FILE_PATH
-        if (!deploymentConfig) {
+        if (!deploymentConfig) 
+        {
           filename = env.DEPLOYMENT_CONFIG_FILE
           deploymentConfig = {}
         }
@@ -85,7 +110,8 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
         robot.log.error(`NOPCOMMAND ${JSON.stringify(nopcommand)}`)
         Settings.handleError(nop, context, repo, deploymentConfig, ref, nopcommand)
       }
-      } else {
+      else 
+      {
         throw e
       }
     }
