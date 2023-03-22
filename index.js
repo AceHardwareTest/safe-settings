@@ -32,6 +32,7 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
         const nopcommand = new NopCommand(filename, repo, null, e, 'ERROR')
         robot.log.error(`NOPCOMMAND ${JSON.stringify(nopcommand)}`)
         Settings.handleError(nop, context, repo, deploymentConfig, ref, nopcommand)
+      }
       } else {
         throw e
       }
@@ -57,6 +58,7 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
         const nopcommand = new NopCommand(filename, repo, null, e, 'ERROR')
         robot.log.error(`NOPCOMMAND ${JSON.stringify(nopcommand)}`)
         Settings.handleError(nop, context, repo, deploymentConfig, ref, nopcommand)
+      }
       } else {
         throw e
       }
@@ -82,6 +84,7 @@ module.exports = (robot, _, Settings = require('./lib/settings')) => {
         const nopcommand = new NopCommand(filename, repo, null, e, 'ERROR')
         robot.log.error(`NOPCOMMAND ${JSON.stringify(nopcommand)}`)
         Settings.handleError(nop, context, repo, deploymentConfig, ref, nopcommand)
+      }
       } else {
         throw e
       }
